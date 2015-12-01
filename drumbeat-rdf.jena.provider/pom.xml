@@ -4,7 +4,7 @@
 
 	<parent>
 		<groupId>fi.hut.cs.drumbeat</groupId>
-		<artifactId>drumbeat-rest-api</artifactId>
+		<artifactId>drumbeat-jena</artifactId>
 		<version>0.5.0-SNAPSHOT</version>
 		<relativePath>../!drumbeat-jena</relativePath>
 	</parent>
