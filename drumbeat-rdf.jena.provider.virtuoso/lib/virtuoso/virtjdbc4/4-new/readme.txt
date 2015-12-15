@@ -1,0 +1,1 @@
+The .jar file was downloaded from: https://github.com/openlink/virtuoso-opensource/blob/develop/7/libsrc/JDBCDriverType4/virtjdbc4.jar
