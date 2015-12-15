@@ -15,3 +15,11 @@ Step-by-step run the following commands:
 >cd !drumbeat-jena
 
 >mvn clean install
+
+
+
+
+
+****
+
+Note: Virtuoso Jena driver source code copied from: https://github.com/openlink/virtuoso-opensource/tree/develop/7/binsrc/jena2/virtuoso_driver
