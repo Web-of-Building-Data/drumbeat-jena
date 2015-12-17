@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 
@@ -49,4 +52,13 @@ public class MemoryJenaProvider extends AbstractJenaProvider {
 		cache.clear();
 	}
 
+	@Override
+	public QueryExecution createQueryExecution(String query, Model model) {
+		return QueryExecutionFactory.create(query, model);
+	}
+
+	@Override
+	public QueryExecution createQueryExecution(Query query, Model model) {
+		return QueryExecutionFactory.create(query, model);
+	}
 }

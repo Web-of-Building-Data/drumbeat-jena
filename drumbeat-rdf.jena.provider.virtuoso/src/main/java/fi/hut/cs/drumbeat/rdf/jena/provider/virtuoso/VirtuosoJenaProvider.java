@@ -10,7 +10,10 @@ import fi.hut.cs.drumbeat.rdf.modelfactory.JenaProviderException;
 import org.apache.log4j.Logger;
 
 import virtuoso.jena.driver.VirtModel;
+import virtuoso.jena.driver.VirtuosoQueryExecutionFactory;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.rdf.model.Model;
 
 public class VirtuosoJenaProvider extends AbstractJenaProvider {
@@ -84,4 +87,14 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 		cache.clear();
 	}
 
+	@Override
+	public QueryExecution createQueryExecution(String query, Model model) {
+		return VirtuosoQueryExecutionFactory.create(query, model);
+	}
+
+	@Override
+	public QueryExecution createQueryExecution(Query query, Model model) {
+		return VirtuosoQueryExecutionFactory.create(query, model);
+	}
+	
 }

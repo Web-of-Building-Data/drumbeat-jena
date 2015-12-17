@@ -3,9 +3,12 @@ package fi.hut.cs.drumbeat.rdf.modelfactory;
 import java.lang.reflect.Constructor;
 import java.util.Properties;
 
+import com.hp.hpl.jena.query.Query;
+import com.hp.hpl.jena.query.QueryExecution;
+import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.rdf.model.Model;
 
-public abstract class AbstractJenaProvider {
+public abstract class AbstractJenaProvider implements JenaProvider {
 	
 	/****************************************
 	 *  STATIC MEMBERS
@@ -180,4 +183,20 @@ public abstract class AbstractJenaProvider {
 	public abstract Model openModel(String graphName) throws JenaProviderException;
 	
 	
+	/**
+	 * Creates a {@link QueryExecution} object using a {@link QueryExecutionFactory}
+	 * @param query
+	 * @param model
+	 * @return
+	 */
+	public abstract QueryExecution createQueryExecution(String query, Model model);
+	
+	
+	/**
+	 * Creates a {@link QueryExecution} object using a {@link QueryExecutionFactory}
+	 * @param query
+	 * @param model
+	 * @return
+	 */
+	public abstract QueryExecution createQueryExecution(Query query, Model model);
 }
