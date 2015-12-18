@@ -1,11 +1,8 @@
-package fi.hut.cs.drumbeat.rdf.jena.provider.virtuoso;
+package fi.aalto.cs.drumbeat.rdf.jena.provider.virtuoso;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import fi.hut.cs.drumbeat.rdf.modelfactory.AbstractJenaProvider;
-import fi.hut.cs.drumbeat.rdf.modelfactory.JenaProviderException;
 
 import org.apache.log4j.Logger;
 
@@ -15,6 +12,9 @@ import virtuoso.jena.driver.VirtuosoQueryExecutionFactory;
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.rdf.model.Model;
+
+import fi.aalto.cs.drumbeat.rdf.jena.provider.AbstractJenaProvider;
+import fi.aalto.cs.drumbeat.rdf.jena.provider.JenaProviderException;
 
 public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	

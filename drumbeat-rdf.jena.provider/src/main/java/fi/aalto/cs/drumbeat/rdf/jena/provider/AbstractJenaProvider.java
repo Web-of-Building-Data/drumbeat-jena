@@ -1,4 +1,4 @@
-package fi.hut.cs.drumbeat.rdf.modelfactory;
+package fi.aalto.cs.drumbeat.rdf.jena.provider;
 
 import java.lang.reflect.Constructor;
 import java.util.Properties;

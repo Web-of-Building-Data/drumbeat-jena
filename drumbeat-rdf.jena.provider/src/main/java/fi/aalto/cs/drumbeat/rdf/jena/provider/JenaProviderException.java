@@ -1,4 +1,4 @@
-package fi.hut.cs.drumbeat.rdf.modelfactory;
+package fi.aalto.cs.drumbeat.rdf.jena.provider;
 
 @SuppressWarnings("serial")
 public class JenaProviderException extends Exception {

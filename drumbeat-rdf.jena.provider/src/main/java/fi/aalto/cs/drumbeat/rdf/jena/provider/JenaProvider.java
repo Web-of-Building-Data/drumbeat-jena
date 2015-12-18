@@ -1,4 +1,4 @@
-package fi.hut.cs.drumbeat.rdf.modelfactory;
+package fi.aalto.cs.drumbeat.rdf.jena.provider;
 
 import com.hp.hpl.jena.query.Query;
 import com.hp.hpl.jena.query.QueryExecution;
