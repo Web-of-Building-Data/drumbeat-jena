@@ -22,7 +22,13 @@ import fi.aalto.cs.drumbeat.rdf.jena.provider.JenaProviderException;
 
 public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	
+	public static final long BULK_LOAD_STATUS_WAITING = 0; 
+	public static final long BULK_LOAD_STATUS_IN_PROGRESS = 1; 
+	public static final long BULK_LOAD_STATUS_COMPLETE = 2; 
+	
 	private static final Logger logger = Logger.getLogger(VirtuosoJenaProvider.class);
+	
+	private static Object locker = new Object();
 	
 	private Map<String, Model> cache = new HashMap<>();
 
@@ -105,30 +111,101 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	public boolean supportsBulkLoading() {
 		return true;
 	}
+	
+	@Override
+	public boolean bulkLoadFile(String filePath, String graphName) throws JenaProviderException {
+		
+		filePath = filePath.replaceAll("\\\\",  "/");		
+		int indexOfSlash = filePath.lastIndexOf('/');
+		int loaded = bulkLoadDir(filePath.substring(0, indexOfSlash), filePath.substring(indexOfSlash + 1), graphName);
+		return loaded > 0;
+		
+	}
 
 	@Override
-	public void bulkLoad(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException {
+	public int bulkLoadDir(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException {
 		
-		try {
-			
-			Class.forName("virtuoso.jdbc4.Driver");
-			
-			Connection connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
-			
-			Statement stmt = connection.createStatement();
-			
-			dirPath = dirPath.replaceAll("\\\\",  "/");
-			
+		synchronized (locker) {
+
+			dirPath = dirPath.replaceAll("\\\\",  "/");				
+			while (dirPath.endsWith("/")) {
+				dirPath = dirPath.substring(0, dirPath.length() - 1);
+			}
+
 			logger.info(String.format("[Virt] Loading file '%s/%s' into graph <%s>", dirPath, fileNamePattern, graphName));
+
+			try {
+				
+				Class.forName("virtuoso.jdbc4.Driver");				
+				Connection connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
+				
+				Statement stmt = connection.createStatement();
+				
+				//
+				// clear status table
+				//
+				String clearTableQuery = "DELETE FROM DB.DBA.load_list";				
+				logger.debug(String.format("[Virt] Query: '%s'", clearTableQuery));
+				stmt.executeUpdate(clearTableQuery);
+				
+				//
+				// load files to queue
+				//
+				String loadDirQuery = String.format(
+						"ld_dir('%s', '%s', '%s')",
+						dirPath,
+						fileNamePattern,
+						graphName);
+				logger.debug(String.format("[Virt] Query: '%s'", loadDirQuery));				
+				stmt.executeQuery(loadDirQuery);
+				
+				//
+				// wait while loader running
+				//
+				stmt.executeQuery("rdf_loader_run()");				
+		
+				//
+				// clear status table
+				//
+				String selectStatusQuery = "SELECT ll_file, ll_graph, ll_state, ll_error FROM DB.DBA.load_list";				
+				logger.debug(String.format("[Virt] Query: '%s'", selectStatusQuery));
+				ResultSet resultSet = stmt.executeQuery(selectStatusQuery);
+				
+				int fileLoadedCount = 0;
+				
+				for (; resultSet.next(); ++fileLoadedCount) {
+					long status = resultSet.getLong("ll_state");
+					
+					if (status != BULK_LOAD_STATUS_COMPLETE) {
+						throw new JenaProviderException(
+								String.format(
+									"Bulk load is incompelete: state=%d, file='%s', graph='%s'",
+									status,
+									resultSet.getString("ll_file"),
+									resultSet.getString("ll_graph")));
+					}
+					
+					String error = resultSet.getString("ll_error");
+					if (error != null) {
+						throw new JenaProviderException(
+								String.format(
+									"Bulk load error: error=%s, file='%s', graph='%s'",
+									error,
+									resultSet.getString("ll_file"),
+									resultSet.getString("ll_graph")));						
+					}
+				}
+				
+				return fileLoadedCount;
+				
+			} catch (JenaProviderException e) {
+				throw e;
+			} catch (Exception e) {
+				throw new JenaProviderException("Bulk load error: " + e.getMessage(), e);
+			}
 			
-			stmt.executeQuery(String.format("ld_dir('%s', '%s', '%s')", dirPath, fileNamePattern, graphName));
-	
-	//			stmt.executeQuery("select * from DB.DBA.load_list");			
 			
-			stmt.executeQuery("rdf_loader_run()");
 			
-		} catch (Exception e) {
-			throw new JenaProviderException("Bulk loading error: " + e.getMessage(), e);
 		}
 		
 	}

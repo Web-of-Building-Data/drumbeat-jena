@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import fi.aalto.cs.drumbeat.rdf.jena.provider.virtuoso.VirtuosoJenaProvider;
 
 public class VirtuosoBulkLoaderExample {
@@ -24,9 +26,22 @@ public class VirtuosoBulkLoaderExample {
 					null);
 			
 			if (provider.supportsBulkLoading()) {
-				File file = new File("c:/PROGRAMS/virtuoso-opensource/vad/sample.ttl");
-				System.out.println("Bulk loading");
-				provider.bulkLoad(file.getParentFile().getCanonicalPath(), file.getName(), "http://example.org/test/sample-6");
+				File file = new File("c:\\PROGRAMS\\virtuoso-opensource\\vad\\file-3.ttl.gz");
+				String graphUri = "http://example.org/test/sample-6";
+
+				Model graph = provider.openModel(graphUri);
+				long oldSize = graph.size();
+				if (oldSize > 0) {
+					graph.removeAll();
+				}
+
+				System.out.printf("Bulk loading file '%s' to graph <%s>%n", file.getAbsoluteFile(), graphUri);
+//				int fileLoadedCount = provider.bulkLoadFile(file.getCanonicalPath(), graphUri);
+				
+				int fileLoadedCount = provider.bulkLoadDir(file.getParentFile().getCanonicalPath(), "sample*.ttl", graphUri);
+				
+				System.out.printf("Bulk loading file completed: file loaded=%d, graph old size = %d, new size = %d", fileLoadedCount, oldSize, graph.size());
+				
 			}
 		
 //			Class.forName("virtuoso.jdbc4.Driver");

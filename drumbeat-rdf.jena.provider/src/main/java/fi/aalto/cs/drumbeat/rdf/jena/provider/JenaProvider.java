@@ -56,9 +56,29 @@ public interface JenaProvider {
 	
 	
 	
+	/**
+	 * Returns a flag indicating whethere the jena provider support bulk loading
+	 * @return
+	 */
 	public boolean supportsBulkLoading();	
 	
+	/**
+	 * Loads a file to a graph
+	 * @param filePath
+	 * @param graphName
+	 * @return number of files loaded
+	 * @throws JenaProviderException
+	 */
+	public boolean bulkLoadFile(String filePath, String graphName) throws JenaProviderException;
 	
-	public void bulkLoad(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException;
+	/**
+	 * Loads a file to a graph
+	 * @param dirPath
+	 * @param fileNamePattern
+	 * @param graphName
+	 * @return number of files loaded
+	 * @throws JenaProviderException
+	 */
+	public int bulkLoadDir(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException;
 
 }

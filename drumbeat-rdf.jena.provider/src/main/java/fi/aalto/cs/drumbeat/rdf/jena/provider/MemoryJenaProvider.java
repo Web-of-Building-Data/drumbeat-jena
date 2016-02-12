@@ -67,8 +67,12 @@ public class MemoryJenaProvider extends AbstractJenaProvider {
 		return false;
 	}
 
+	public boolean bulkLoadFile(String filePath, String graphName) throws JenaProviderException {
+		throw new UnsupportedOperationException();		
+	}
+	
 	@Override
-	public void bulkLoad(String dirPath, String fileNamePattern, String graphUri) {
+	public int bulkLoadDir(String dirPath, String fileNamePattern, String graphUri) {
 		throw new UnsupportedOperationException();
 	}
 }
