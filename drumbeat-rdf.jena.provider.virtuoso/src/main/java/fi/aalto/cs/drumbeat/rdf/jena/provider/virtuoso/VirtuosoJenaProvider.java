@@ -1,5 +1,9 @@
 package fi.aalto.cs.drumbeat.rdf.jena.provider.virtuoso;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -95,6 +99,38 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	@Override
 	public QueryExecution createQueryExecution(Query query, Model model) {
 		return VirtuosoQueryExecutionFactory.create(query, model);
+	}
+
+	@Override
+	public boolean supportsBulkLoading() {
+		return true;
+	}
+
+	@Override
+	public void bulkLoad(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException {
+		
+		try {
+			
+			Class.forName("virtuoso.jdbc4.Driver");
+			
+			Connection connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
+			
+			Statement stmt = connection.createStatement();
+			
+			dirPath = dirPath.replaceAll("\\\\",  "/");
+			
+			logger.info(String.format("[Virt] Loading file '%s/%s' into graph <%s>", dirPath, fileNamePattern, graphName));
+			
+			stmt.executeQuery(String.format("ld_dir('%s', '%s', '%s')", dirPath, fileNamePattern, graphName));
+	
+	//			stmt.executeQuery("select * from DB.DBA.load_list");			
+			
+			stmt.executeQuery("rdf_loader_run()");
+			
+		} catch (Exception e) {
+			throw new JenaProviderException("Bulk loading error: " + e.getMessage(), e);
+		}
+		
 	}
 	
 }

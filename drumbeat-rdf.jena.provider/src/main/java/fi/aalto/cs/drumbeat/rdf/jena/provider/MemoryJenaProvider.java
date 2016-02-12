@@ -61,4 +61,14 @@ public class MemoryJenaProvider extends AbstractJenaProvider {
 	public QueryExecution createQueryExecution(Query query, Model model) {
 		return QueryExecutionFactory.create(query, model);
 	}
+
+	@Override
+	public boolean supportsBulkLoading() {
+		return false;
+	}
+
+	@Override
+	public void bulkLoad(String dirPath, String fileNamePattern, String graphUri) {
+		throw new UnsupportedOperationException();
+	}
 }

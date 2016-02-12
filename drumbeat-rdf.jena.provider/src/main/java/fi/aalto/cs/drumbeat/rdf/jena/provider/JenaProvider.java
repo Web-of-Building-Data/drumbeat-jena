@@ -52,6 +52,13 @@ public interface JenaProvider {
 	 * @param model
 	 * @return
 	 */
-	public abstract QueryExecution createQueryExecution(Query query, Model model);	
+	public QueryExecution createQueryExecution(Query query, Model model);
+	
+	
+	
+	public boolean supportsBulkLoading();	
+	
+	
+	public void bulkLoad(String dirPath, String fileNamePattern, String graphName) throws JenaProviderException;
 
 }
