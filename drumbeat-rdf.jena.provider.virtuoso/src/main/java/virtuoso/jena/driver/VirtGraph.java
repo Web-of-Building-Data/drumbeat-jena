@@ -1947,8 +1947,10 @@ public class VirtGraph extends GraphBase {
 
 	@Override
 	protected ExtendedIterator<Triple> graphBaseFind(Triple triplePattern) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return graphBaseFind(null, triplePattern);
+		// TODO Auto-generated method s	tub
+//		return null;
 	}
 
 
