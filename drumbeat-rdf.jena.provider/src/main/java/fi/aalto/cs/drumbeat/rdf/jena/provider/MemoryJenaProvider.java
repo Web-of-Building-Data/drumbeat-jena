@@ -48,6 +48,15 @@ public class MemoryJenaProvider extends AbstractJenaProvider {
 	}
 
 	@Override
+	public void deleteModel(String graphName) throws JenaProviderException {
+		if (graphName == null) {
+			graphName = "";
+		}
+		
+		cache.remove(graphName);
+	}
+
+	@Override
 	public void release() throws JenaProviderException {
 		cache.clear();
 	}

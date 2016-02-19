@@ -38,6 +38,15 @@ public interface JenaProvider {
 	
 	
 	/**
+	 * Returns a Jena model instance for the given graph name. If the model already exists, it is simply opened.
+	 * @param graphName
+	 * @return
+	 */
+	public void deleteModel(String graphName) throws JenaProviderException;
+	
+	
+
+	/**
 	 * Creates a {@link QueryExecution} object using a {@link QueryExecutionFactory}
 	 * @param query
 	 * @param model

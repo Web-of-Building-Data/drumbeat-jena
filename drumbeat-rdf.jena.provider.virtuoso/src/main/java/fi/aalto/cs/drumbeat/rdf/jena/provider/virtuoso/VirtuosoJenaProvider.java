@@ -3,6 +3,7 @@ package fi.aalto.cs.drumbeat.rdf.jena.provider.virtuoso;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +91,42 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	}
 
 	@Override
+	public void deleteModel(String graphName) throws JenaProviderException {
+		
+		if (graphName == null) {
+			graphName = "";
+		}
+		
+		cache.remove(graphName);
+		
+		synchronized (locker) {
+
+			logger.info(String.format("[Virt] Removing graph <%s>", graphName));
+
+			try {
+				
+				Class.forName("virtuoso.jdbc4.Driver");				
+				Connection connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
+				
+				Statement stmt = connection.createStatement();
+				
+				//
+				// clear status table
+				//
+				String deleteGraphQuery = "SPARQL DROP SILENT GRAPH <" + graphName + ">";				
+				stmt.executeQuery(deleteGraphQuery);
+				
+			} catch (Exception e) {
+				throw new JenaProviderException("Deleting graph error: " + e.getMessage(), e);
+			}			
+			
+		}
+		
+		
+	}
+
+	
+	@Override
 	public void release() throws JenaProviderException {
 		for (Model model : cache.values()) {
 			model.close();			
@@ -133,13 +170,16 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 			}
 
 			logger.info(String.format("[Virt] Loading file '%s/%s' into graph <%s>", dirPath, fileNamePattern, graphName));
+			
+			Connection connection = null;
+			Statement stmt = null;
 
 			try {
 				
 				Class.forName("virtuoso.jdbc4.Driver");				
-				Connection connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
+				connection = DriverManager.getConnection(getServerUrl(), getUserName(), getPassword());
 				
-				Statement stmt = connection.createStatement();
+				stmt = connection.createStatement();
 				
 				//
 				// clear status table
@@ -201,7 +241,19 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 			} catch (JenaProviderException e) {
 				throw e;
 			} catch (Exception e) {
+				logger.error("Bulk load error: " + e.getMessage(), e);
 				throw new JenaProviderException("Bulk load error: " + e.getMessage(), e);
+			} finally {
+				try {
+					if (connection != null) {
+						if (stmt != null) {
+							stmt.close();
+						}
+							connection.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			
