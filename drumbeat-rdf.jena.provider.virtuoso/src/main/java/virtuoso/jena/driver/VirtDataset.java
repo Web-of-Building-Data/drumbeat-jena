@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtDataSource.java,v 1.7.2.8 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -30,18 +30,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.util.iterator.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.shared.*;
+import org.apache.jena.util.iterator.*;
 
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.LabelExistsException;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.shared.Lock;
-import com.hp.hpl.jena.sparql.core.DatasetGraph;
-import com.hp.hpl.jena.sparql.core.Quad;
-import com.hp.hpl.jena.sparql.util.Context;
-import com.hp.hpl.jena.query.ReadWrite;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.query.LabelExistsException;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.shared.Lock;
+import org.apache.jena.sparql.core.DatasetGraph;
+import org.apache.jena.sparql.core.Quad;
+import org.apache.jena.sparql.util.Context;
+import org.apache.jena.query.ReadWrite;
 
 import virtuoso.jdbc4.VirtuosoDataSource;
 
@@ -247,7 +247,7 @@ public class VirtDataset extends VirtGraph implements Dataset {
      */
     public Lock getLock() {
         if (lock == null)
-            lock = new com.hp.hpl.jena.shared.LockNone();
+            lock = new org.apache.jena.shared.LockNone();
         return lock;
     }
 

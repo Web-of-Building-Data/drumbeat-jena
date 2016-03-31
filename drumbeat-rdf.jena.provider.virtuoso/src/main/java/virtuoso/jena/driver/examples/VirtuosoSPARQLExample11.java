@@ -1,4 +1,3 @@
-package virtuoso.jena.driver.examples;
 /*
  *  $Id$
  *
@@ -22,12 +21,12 @@ package virtuoso.jena.driver.examples;
  *
  */
 
-//package virtuoso.jena.driver;
+package virtuoso.jena.driver.examples;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.graph.*;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.graph.*;
 import java.util.*;
 
 import virtuoso.jena.driver.*;
@@ -84,7 +83,7 @@ public class VirtuosoSPARQLExample11 {
         { return (Property) rdfNode( m, s ).as( Property.class ); }
 
     public static RDFNode rdfNode( Model m, String s )
-        { return m.asRDFNode( Node.createURI( "eh:/"+s ) ); }
+        { return m.asRDFNode( NodeFactory.createURI( "eh:/"+s ) ); }
 
 
 }

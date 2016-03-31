@@ -1,4 +1,3 @@
-package virtuoso.jena.driver.examples;
 /*
  *  $Id$
  *
@@ -22,14 +21,15 @@ package virtuoso.jena.driver.examples;
  *
  */
 
-//package virtuoso.jena.driver;
+package virtuoso.jena.driver.examples;
 
 import java.util.*;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.util.iterator.ExtendedIterator;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Triple;
+import org.apache.jena.query.*;
+import org.apache.jena.util.iterator.ExtendedIterator;
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple;
+import org.apache.jena.graph.*;
 
 import virtuoso.jena.driver.*;
 
@@ -44,17 +44,17 @@ public class VirtuosoSPARQLExample5
 	else
 	    url = args[0];
 
-	Node foo1 = Node.createURI("http://example.org/#foo1");
-	Node bar1 = Node.createURI("http://example.org/#bar1");
-	Node baz1 = Node.createURI("http://example.org/#baz1");
+	Node foo1 = NodeFactory.createURI("http://example.org/#foo1");
+	Node bar1 = NodeFactory.createURI("http://example.org/#bar1");
+	Node baz1 = NodeFactory.createURI("http://example.org/#baz1");
 
-	Node foo2 = Node.createURI("http://example.org/#foo2");
-	Node bar2 = Node.createURI("http://example.org/#bar2");
-	Node baz2 = Node.createURI("http://example.org/#baz2");
+	Node foo2 = NodeFactory.createURI("http://example.org/#foo2");
+	Node bar2 = NodeFactory.createURI("http://example.org/#bar2");
+	Node baz2 = NodeFactory.createURI("http://example.org/#baz2");
 
-	Node foo3 = Node.createURI("http://example.org/#foo3");
-	Node bar3 = Node.createURI("http://example.org/#bar3");
-	Node baz3 = Node.createURI("http://example.org/#baz3");
+	Node foo3 = NodeFactory.createURI("http://example.org/#foo3");
+	Node bar3 = NodeFactory.createURI("http://example.org/#bar3");
+	Node baz3 = NodeFactory.createURI("http://example.org/#baz3");
 
 	VirtGraph graph = new VirtGraph ("Example5", url, "dba", "dba");
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtPrefixMapping.java,v 1.3.2.3 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -33,9 +33,9 @@ import virtuoso.sql.*;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.shared.PrefixMapping;
-import com.hp.hpl.jena.shared.impl.PrefixMappingImpl;
+import org.apache.jena.shared.*;
+import org.apache.jena.shared.PrefixMapping;
+import org.apache.jena.shared.impl.PrefixMappingImpl;
 
 public class VirtPrefixMapping extends PrefixMappingImpl {
 
@@ -93,7 +93,7 @@ public class VirtPrefixMapping extends PrefixMappingImpl {
     /* (non-Javadoc)
      * Override the default implementation so we can catch the write operation
      * and update the persistent store.
-     * @see com.hp.hpl.jena.shared.PrefixMapping#setNsPrefix(java.lang.String, java.lang.String)
+     * @see org.apache.jena.shared.PrefixMapping#setNsPrefix(java.lang.String, java.lang.String)
      */
     public PrefixMapping setNsPrefix(String prefix, String uri) {
         super.setNsPrefix(prefix, uri);

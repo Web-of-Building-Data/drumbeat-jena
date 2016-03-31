@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtInfGraph.java,v 1.1.4.4 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -27,14 +27,14 @@ package virtuoso.jena.driver;
 import java.util.*;
 
 
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.graph.compose.MultiUnion;
-import com.hp.hpl.jena.graph.impl.*;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.datatypes.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.reasoner.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.graph.compose.MultiUnion;
+import org.apache.jena.graph.impl.*;
+import org.apache.jena.shared.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.datatypes.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.reasoner.*;
 
 
 public class VirtInfGraph extends VirtGraph implements InfGraph {

@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtResSetQIter.java,v 1.8.2.3 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -27,17 +27,17 @@ import java.sql.*;
 import java.util.*;
 
 import virtuoso.sql.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.datatypes.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.sparql.core.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.shared.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.datatypes.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.sparql.core.*;
 
 
 public class VirtResSetQIter implements ClosableIterator<Quad> {
     protected Quad v_row;
-    protected TripleMatch v_in;
+    protected Triple v_in;
     protected boolean v_finished = false;
     protected boolean v_prefetched = false;
     protected VirtGraph v_graph = null;
@@ -49,7 +49,7 @@ public class VirtResSetQIter implements ClosableIterator<Quad> {
         v_finished = true;
     }
 
-    public VirtResSetQIter(VirtGraph graph, Iterator<Node> graphList, TripleMatch in) {
+    public VirtResSetQIter(VirtGraph graph, Iterator<Node> graphList, Triple in) {
         v_in = in;
         v_graph = graph;
         v_gList = graphList;

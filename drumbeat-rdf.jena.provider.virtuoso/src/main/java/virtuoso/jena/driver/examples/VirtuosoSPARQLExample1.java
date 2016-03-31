@@ -1,4 +1,3 @@
-package virtuoso.jena.driver.examples;
 /*
  *  $Id$
  *
@@ -22,10 +21,10 @@ package virtuoso.jena.driver.examples;
  *
  */
 
-//package virtuoso.jena.driver;
+package virtuoso.jena.driver.examples;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.RDFNode;
 
 import virtuoso.jena.driver.*;
 

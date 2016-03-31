@@ -14,9 +14,9 @@ import org.apache.log4j.Logger;
 import virtuoso.jena.driver.VirtModel;
 import virtuoso.jena.driver.VirtuosoQueryExecutionFactory;
 
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.QueryExecution;
-import com.hp.hpl.jena.rdf.model.Model;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.QueryExecution;
+import org.apache.jena.rdf.model.Model;
 
 import fi.aalto.cs.drumbeat.rdf.jena.provider.AbstractJenaProvider;
 import fi.aalto.cs.drumbeat.rdf.jena.provider.JenaProviderException;

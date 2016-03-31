@@ -5,29 +5,12 @@
 	<parent>
 		<groupId>fi.hut.cs.drumbeat</groupId>
 		<artifactId>drumbeat-jena</artifactId>
-		<version>0.7.7-SNAPSHOT</version>
+		<version>0.8.0</version>
 		<relativePath>../!drumbeat-jena</relativePath>
 	</parent>
 	
 	<artifactId>drumbeat-rdf.jena.provider</artifactId>
 	<name>${project.artifactId}</name>
 	<packaging>jar</packaging>
-
-	<dependencies>
-
-		<!-- Apache Jena Core -->
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>jena-core</artifactId>
-			<version>${jena.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>jena-arq</artifactId>
-			<version>${jena.version}</version>
-		</dependency>		
-		
-	</dependencies>
 
 </project>

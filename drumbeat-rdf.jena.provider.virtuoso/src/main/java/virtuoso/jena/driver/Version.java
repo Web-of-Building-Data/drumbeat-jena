@@ -1,5 +1,5 @@
 /*
- *  $Id: Version.java,v 1.1.4.8 2012/03/15 12:56:34 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -26,10 +26,10 @@ package virtuoso.jena.driver;
 
 public class Version {
 
-   protected static final String DRV_VER = "2.12.0";
+   protected static final String DRV_VER = "3.0.0";
 
    // The major and minor version number
-   protected static final String build_id = "1.23";
+   protected static final String build_id = "1.24";
 
    public static void main(String args[])
    {

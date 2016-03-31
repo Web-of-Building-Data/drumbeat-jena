@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtuosoQueryEngine.java,v 1.1.4.9 2012/03/15 12:56:34 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -24,33 +24,33 @@ package virtuoso.jena.driver;
 
 import java.util.*;
 
-import com.hp.hpl.jena.graph.NodeFactory;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.graph.Node;
+import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.shared.*;
+import org.apache.jena.graph.Node;
 
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.sparql.ARQInternalErrorException;
-import com.hp.hpl.jena.sparql.ARQConstants;
-import com.hp.hpl.jena.sparql.algebra.Op;
-import com.hp.hpl.jena.sparql.algebra.Transform;
-import com.hp.hpl.jena.sparql.algebra.TransformCopy;
-import com.hp.hpl.jena.sparql.algebra.Transformer;
-import com.hp.hpl.jena.sparql.algebra.op.OpBGP;
-import com.hp.hpl.jena.sparql.core.DatasetGraph;
-import com.hp.hpl.jena.sparql.core.Var;
-import com.hp.hpl.jena.sparql.engine.binding.BindingMap;
-import com.hp.hpl.jena.sparql.engine.binding.Binding;
-import com.hp.hpl.jena.sparql.engine.binding.BindingFactory;
-import com.hp.hpl.jena.sparql.engine.Plan;
-import com.hp.hpl.jena.sparql.engine.QueryEngineFactory;
-import com.hp.hpl.jena.sparql.engine.QueryEngineRegistry;
-import com.hp.hpl.jena.sparql.engine.QueryIterator;
-import com.hp.hpl.jena.sparql.engine.iterator.QueryIteratorBase;
-import com.hp.hpl.jena.sparql.engine.binding.BindingMap;
-import com.hp.hpl.jena.sparql.engine.main.QueryEngineMain;
-import com.hp.hpl.jena.sparql.serializer.SerializationContext;
-import com.hp.hpl.jena.sparql.util.Context;
-import com.hp.hpl.jena.sparql.util.Utils;
+import org.apache.jena.query.Query;
+import org.apache.jena.sparql.ARQInternalErrorException;
+import org.apache.jena.sparql.ARQConstants;
+import org.apache.jena.sparql.algebra.Op;
+import org.apache.jena.sparql.algebra.Transform;
+import org.apache.jena.sparql.algebra.TransformCopy;
+import org.apache.jena.sparql.algebra.Transformer;
+import org.apache.jena.sparql.algebra.op.OpBGP;
+import org.apache.jena.sparql.core.DatasetGraph;
+import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.engine.binding.BindingMap;
+import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.engine.binding.BindingFactory;
+import org.apache.jena.sparql.engine.Plan;
+import org.apache.jena.sparql.engine.QueryEngineFactory;
+import org.apache.jena.sparql.engine.QueryEngineRegistry;
+import org.apache.jena.sparql.engine.QueryIterator;
+import org.apache.jena.sparql.engine.iterator.QueryIteratorBase;
+import org.apache.jena.sparql.engine.binding.BindingMap;
+import org.apache.jena.sparql.engine.main.QueryEngineMain;
+import org.apache.jena.sparql.serializer.SerializationContext;
+import org.apache.jena.sparql.util.Context;
+import org.apache.jena.sparql.util.Utils;
 import org.apache.jena.atlas.io.IndentedWriter;
 
 

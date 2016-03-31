@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtuosoUpdateFactory.java,v 1.1.2.2 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -30,10 +30,10 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Reader;
 
-import com.hp.hpl.jena.update.*;
-import com.hp.hpl.jena.util.FileUtils;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.query.Dataset;
+import org.apache.jena.update.*;
+import org.apache.jena.util.FileUtils;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.query.Dataset;
 
 public class VirtuosoUpdateFactory {
 

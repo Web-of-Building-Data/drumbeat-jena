@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtuosoQueryExecution.java,v 1.11.2.11 2012/03/15 12:56:34 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -32,33 +32,33 @@ import java.sql.ResultSetMetaData;
 
 import virtuoso.sql.*;
 
-import com.hp.hpl.jena.graph.NodeFactory;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.query.Query;
-import com.hp.hpl.jena.query.ResultSet;
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.QueryExecution;
+import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.shared.*;
+import org.apache.jena.query.Query;
+import org.apache.jena.query.ResultSet;
+import org.apache.jena.query.Dataset;
+import org.apache.jena.query.QueryExecution;
 
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.graph.Node;
-import com.hp.hpl.jena.graph.Triple;
-import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.graph.Node;
+import org.apache.jena.graph.Triple;
+import org.apache.jena.rdf.model.*;
 
-import com.hp.hpl.jena.sparql.engine.binding.BindingFactory;
-import com.hp.hpl.jena.sparql.engine.binding.Binding;
-import com.hp.hpl.jena.sparql.engine.binding.BindingMap;
-import com.hp.hpl.jena.sparql.engine.ResultSetStream;
-import com.hp.hpl.jena.sparql.engine.QueryIterator;
-import com.hp.hpl.jena.sparql.engine.iterator.QueryIterConcat;
-import com.hp.hpl.jena.sparql.engine.http.QueryEngineHTTP;
-import com.hp.hpl.jena.sparql.engine.iterator.QueryIterSingleton;
-import com.hp.hpl.jena.sparql.engine.iterator.QueryIteratorResultSet;
-import com.hp.hpl.jena.sparql.core.Var;
-import com.hp.hpl.jena.sparql.core.ResultBinding;
-import com.hp.hpl.jena.sparql.util.Context;
-import com.hp.hpl.jena.sparql.util.ModelUtils;
-import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.query.*;
+import org.apache.jena.sparql.engine.binding.BindingFactory;
+import org.apache.jena.sparql.engine.binding.Binding;
+import org.apache.jena.sparql.engine.binding.BindingMap;
+import org.apache.jena.sparql.engine.ResultSetStream;
+import org.apache.jena.sparql.engine.QueryIterator;
+import org.apache.jena.sparql.engine.iterator.QueryIterConcat;
+import org.apache.jena.sparql.engine.http.QueryEngineHTTP;
+import org.apache.jena.sparql.engine.iterator.QueryIterSingleton;
+import org.apache.jena.sparql.engine.iterator.QueryIteratorResultSet;
+import org.apache.jena.sparql.core.Var;
+import org.apache.jena.sparql.core.ResultBinding;
+import org.apache.jena.sparql.util.Context;
+import org.apache.jena.sparql.util.ModelUtils;
+import org.apache.jena.util.FileManager;
+import org.apache.jena.query.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -150,7 +150,7 @@ public class VirtuosoQueryExecution implements QueryExecution {
                 Node s = VirtGraph.Object2Node(rs.getObject(1));
                 Node p = VirtGraph.Object2Node(rs.getObject(2));
                 Node o = VirtGraph.Object2Node(rs.getObject(3));
-                com.hp.hpl.jena.rdf.model.Statement st = ModelUtils.tripleToStatement(model, new Triple(s, p, o));
+                org.apache.jena.rdf.model.Statement st = ModelUtils.tripleToStatement(model, new Triple(s, p, o));
                 if (st != null)
                     model.add(st);
             }
@@ -202,7 +202,7 @@ public class VirtuosoQueryExecution implements QueryExecution {
                 Node p = VirtGraph.Object2Node(rs.getObject(2));
                 Node o = VirtGraph.Object2Node(rs.getObject(3));
 
-                com.hp.hpl.jena.rdf.model.Statement st = ModelUtils.tripleToStatement(model, new Triple(s, p, o));
+                org.apache.jena.rdf.model.Statement st = ModelUtils.tripleToStatement(model, new Triple(s, p, o));
                 if (st != null)
                     model.add(st);
             }
@@ -407,7 +407,7 @@ public class VirtuosoQueryExecution implements QueryExecution {
 
 
     ///=== Inner class ===========================================
-    public class VResultSet implements com.hp.hpl.jena.query.ResultSet {
+    public class VResultSet implements org.apache.jena.query.ResultSet {
         java.sql.Statement stmt;
         ResultSetMetaData rsmd;
         java.sql.ResultSet rs;

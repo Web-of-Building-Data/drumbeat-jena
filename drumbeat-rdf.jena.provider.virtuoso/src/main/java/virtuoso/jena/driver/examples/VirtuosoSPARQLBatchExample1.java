@@ -1,5 +1,5 @@
-package virtuoso.jena.driver.examples;
 /*
+
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
  *
@@ -20,9 +20,11 @@ package virtuoso.jena.driver.examples;
  *
  */
 
+package virtuoso.jena.driver.examples;
+
 import java.util.*;
-import com.hp.hpl.jena.graph.Graph;
-import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.graph.Graph;
+import org.apache.jena.rdf.model.*;
 
 import virtuoso.jena.driver.*;
 

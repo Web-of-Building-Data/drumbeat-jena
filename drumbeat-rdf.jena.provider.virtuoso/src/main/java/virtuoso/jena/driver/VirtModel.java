@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtModel.java,v 1.1.2.6 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -30,14 +30,14 @@ import java.util.Iterator;
 import java.util.List;
 import javax.sql.*;
 
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.graph.impl.*;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.datatypes.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.rdf.model.impl.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.graph.impl.*;
+import org.apache.jena.rdf.model.Statement;
+import org.apache.jena.shared.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.datatypes.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.impl.*;
 
 
 import virtuoso.jdbc4.VirtuosoDataSource;

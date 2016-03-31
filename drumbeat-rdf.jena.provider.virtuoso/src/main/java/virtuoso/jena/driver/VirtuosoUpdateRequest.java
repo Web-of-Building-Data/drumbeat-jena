@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtuosoUpdateRequest.java,v 1.4.2.6 2012/03/15 12:56:34 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -30,8 +30,8 @@ import java.sql.*;
 
 import virtuoso.sql.*;
 
-import com.hp.hpl.jena.update.*;
-import com.hp.hpl.jena.shared.*;
+import org.apache.jena.update.*;
+import org.apache.jena.shared.*;
 
 import virtuoso.jdbc4.VirtuosoConnectionPoolDataSource;
 

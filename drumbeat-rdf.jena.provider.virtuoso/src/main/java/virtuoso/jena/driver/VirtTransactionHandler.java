@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtTransactionHandler.java,v 1.3.2.3 2012/03/08 12:55:00 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -27,8 +27,8 @@ package virtuoso.jena.driver;
 import java.sql.*;
 import javax.transaction.xa.*;
 
-import com.hp.hpl.jena.graph.impl.*;
-import com.hp.hpl.jena.shared.*;
+import org.apache.jena.graph.impl.*;
+import org.apache.jena.shared.*;
 
 public class VirtTransactionHandler extends TransactionHandlerBase implements XAResource {
 

@@ -1,5 +1,5 @@
 /*
- *  $Id: VirtGraph.java,v 1.15.2.18 2012/03/15 12:56:34 source Exp $
+ *  $Id:$
  *
  *  This file is part of the OpenLink Software Virtuoso Open-Source (VOS)
  *  project.
@@ -30,16 +30,16 @@ import java.text.SimpleDateFormat;
 import javax.sql.*;
 import javax.transaction.xa.*;
 
-import com.hp.hpl.jena.rdf.model.Statement;
+import org.apache.jena.rdf.model.Statement;
 import virtuoso.sql.*;
 
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.graph.impl.*;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.datatypes.*;
-import com.hp.hpl.jena.rdf.model.*;
-import com.hp.hpl.jena.rdf.model.impl.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.graph.impl.*;
+import org.apache.jena.shared.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.datatypes.*;
+import org.apache.jena.rdf.model.*;
+import org.apache.jena.rdf.model.impl.*;
 
 import virtuoso.jdbc4.VirtuosoConnectionPoolDataSource;
 import virtuoso.jdbc4.VirtuosoDataSource;
@@ -588,21 +588,21 @@ public class VirtGraph extends GraphBase {
             else
                 return insertBNodeAsVirtuosoIRI?("<" + BNode2String(n) + ">"):(BNode2String(n)); 
         } else if (n.isLiteral()) {
-            String s;
+            String s, llang, ltype;
             StringBuilder sb = new StringBuilder();
             sb.append("\"");
             sb.append(escapeString(n.getLiteralLexicalForm()));
             sb.append("\"");
 
-            s = n.getLiteralLanguage();
-            if (s != null && s.length() > 0) {
+            llang = n.getLiteralLanguage();
+            if (llang != null && llang.length() > 0) {
                 sb.append("@");
-                sb.append(s);
+                sb.append(llang);
             }
-            s = n.getLiteralDatatypeURI();
-            if (s != null && s.length() > 0) {
+            ltype = n.getLiteralDatatypeURI();
+            if (llang==null && ltype != null && ltype.length() > 0) {
                 sb.append("^^<");
-                sb.append(s);
+                sb.append(ltype);
                 sb.append(">");
             }
             return sb.toString();
@@ -623,21 +623,21 @@ public class VirtGraph extends GraphBase {
                     return "<" + BNode2String_add(n) + ">";
                 }
             } else if (n.isLiteral()) {
-                String s;
+                String s, llang, ltype;
                 StringBuilder sb = new StringBuilder();
                 sb.append("\"");
                 sb.append(escapeString(n.getLiteralLexicalForm()));
                 sb.append("\"");
 
-                s = n.getLiteralLanguage();
-                if (s != null && s.length() > 0) {
+                llang = n.getLiteralLanguage();
+                if (llang != null && llang.length() > 0) {
                     sb.append("@");
-                    sb.append(s);
+                    sb.append(llang);
                 }
-                s = n.getLiteralDatatypeURI();
-                if (s != null && s.length() > 0) {
+                ltype = n.getLiteralDatatypeURI();
+                if (llang==null && ltype != null && ltype.length() > 0) {
                     sb.append("^^<");
-                    sb.append(s);
+                    sb.append(ltype);
                     sb.append(">");
                 }
                 return sb.toString();
@@ -730,7 +730,7 @@ public class VirtGraph extends GraphBase {
                 }
 
             } else {
-                boolean isAutocommit = connection.getAutoCommit();;
+                boolean isAutocommit = connection.getAutoCommit();
 
                 if (insertBNodeAsVirtuosoIRI 
                     || resetBNodesDictAfterCall
@@ -748,7 +748,6 @@ public class VirtGraph extends GraphBase {
                     data.append(' ');
                     data.append(Node2Str_add(nO));
                     data.append(" .}");
-
                     st.execute(data.toString());
                     st.close();
                 } 
@@ -901,12 +900,12 @@ public class VirtGraph extends GraphBase {
 
 
     @Override
-    public ExtendedIterator<Triple> graphBaseFind(TripleMatch tm) {
+    public ExtendedIterator<Triple> graphBaseFind(Triple tm) {
         return graphBaseFind(null, tm);
     }
 
 
-    protected ExtendedIterator<Triple> graphBaseFind(String _gName, TripleMatch tm) {
+    protected ExtendedIterator<Triple> graphBaseFind(String _gName, Triple tm) {
         StringBuilder sb = new StringBuilder("sparql ");
         Node nS, nP, nO;
 
@@ -1628,12 +1627,12 @@ public class VirtGraph extends GraphBase {
     }
 
 
-    void delete_match(TripleMatch tm) {
+    void delete_match(Triple tm) {
         delete_match(null, tm);
     }
 
 
-    void delete_match(String _gName, TripleMatch tm) {
+    void delete_match(String _gName, Triple tm) {
         Node nS, nP, nO;
 
         checkOpen();
@@ -1729,7 +1728,7 @@ public class VirtGraph extends GraphBase {
     }
 
 
-    public ExtendedIterator reifierTriples(TripleMatch m) {
+    public ExtendedIterator reifierTriples(Triple m) {
         return NiceIterator.emptyIterator();
     }
 
@@ -1745,12 +1744,6 @@ public class VirtGraph extends GraphBase {
         return tranHandler;
     }
 
-    @Override
-    public BulkUpdateHandler getBulkUpdateHandler() {
-        if (bulkHandler == null)
-            bulkHandler = new VirtBulkUpdateHandler(this);
-        return bulkHandler;
-    }
 
     protected VirtPrefixMapping m_prefixMapping = null;
 
@@ -1770,13 +1763,13 @@ public class VirtGraph extends GraphBase {
 
             if (vs.getIriType() == ExtendedString.IRI && (vs.getStrType() & 0x01) == 0x01) {
                 if (vs.toString().indexOf("_:") == 0)
-                    return NodeFactory.createAnon(AnonId.create(vs.toString().substring(2))); // _:
+                    return NodeFactory.createBlankNode(AnonId.create(vs.toString().substring(2)).getBlankNodeId()); // _:
                 else
                     return NodeFactory.createURI(vs.toString());
 
             } else if (vs.getIriType() == ExtendedString.BNODE) {
 //          return NodeFactory.createAnon(AnonId.create(vs.toString().substring(9))); // nodeID://b1234
-                return NodeFactory.createAnon(AnonId.create(vs.toString())); // nodeID://
+                return NodeFactory.createBlankNode(AnonId.create(vs.toString()).getBlankNodeId()); // nodeID://
 
             } else {
                 return NodeFactory.createLiteral(vs.toString());
@@ -1944,14 +1937,6 @@ public class VirtGraph extends GraphBase {
         sb.append(tzm);
         return sb.toString();
     }
-
-	@Override
-	protected ExtendedIterator<Triple> graphBaseFind(Triple triplePattern) {
-		
-		return graphBaseFind(null, triplePattern);
-		// TODO Auto-generated method s	tub
-//		return null;
-	}
 
 
 }

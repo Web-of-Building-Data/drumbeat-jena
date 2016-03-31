@@ -1,4 +1,3 @@
-package virtuoso.jena.driver.examples;
 /*
  *  $Id$
  *
@@ -22,10 +21,10 @@ package virtuoso.jena.driver.examples;
  *
  */
 
-//package virtuoso.jena.driver;
+package virtuoso.jena.driver.examples;
 
-import com.hp.hpl.jena.query.*;
-import com.hp.hpl.jena.rdf.model.RDFNode;
+import org.apache.jena.query.*;
+import org.apache.jena.rdf.model.RDFNode;
 
 import virtuoso.jena.driver.*;
 
@@ -57,9 +56,9 @@ public class VirtuosoSPARQLExample2 {
 		graph.read("http://demo.openlinksw.com/dataspace/person/demo#this", "RDF/XML");
 		System.out.println ("\t Done.");
 
-		System.out.print ("Begin read from 'http://kidehen.idehen.net/dataspace/person/kidehen#this'  ");
-		graph.read("http://kidehen.idehen.net/dataspace/person/kidehen#this", "RDF/XML");
-		System.out.println ("\t Done.");
+//		System.out.print ("Begin read from 'http://kidehen.idehen.net/dataspace/person/kidehen#this'  ");
+//		graph.read("http://kidehen.idehen.net/dataspace/person/kidehen#this", "RDF/XML");
+//		System.out.println ("\t Done.");
 
 
 /*			STEP 3			*/

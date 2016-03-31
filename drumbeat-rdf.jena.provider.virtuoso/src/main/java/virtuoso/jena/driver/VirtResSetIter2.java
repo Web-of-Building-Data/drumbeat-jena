@@ -27,11 +27,11 @@ import java.sql.*;
 import java.util.*;
 
 import virtuoso.sql.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.shared.*;
-import com.hp.hpl.jena.graph.*;
-import com.hp.hpl.jena.datatypes.*;
-import com.hp.hpl.jena.rdf.model.*;
+import org.apache.jena.util.iterator.*;
+import org.apache.jena.shared.*;
+import org.apache.jena.graph.*;
+import org.apache.jena.datatypes.*;
+import org.apache.jena.rdf.model.*;
 
 
 public class VirtResSetIter2 implements Iterator<Triple> {
