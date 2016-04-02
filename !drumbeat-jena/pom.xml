@@ -37,7 +37,7 @@
 
 	<dependencies>
 
-		<!-- Apache Jena Core -->
+		<!-- Apache Jena (Core, ARQ, IRI, TDB) -->
 		<dependency>
 			<groupId>org.apache.jena</groupId>
 			<artifactId>apache-jena-libs</artifactId>
