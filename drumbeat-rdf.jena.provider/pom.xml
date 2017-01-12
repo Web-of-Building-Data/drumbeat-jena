@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>fi.hut.cs.drumbeat</groupId>
+		<groupId>fi.aalto.cs.drumbeat</groupId>
 		<artifactId>drumbeat-jena</artifactId>
 		<version>0.8.0</version>
 		<relativePath>../!drumbeat-jena</relativePath>
