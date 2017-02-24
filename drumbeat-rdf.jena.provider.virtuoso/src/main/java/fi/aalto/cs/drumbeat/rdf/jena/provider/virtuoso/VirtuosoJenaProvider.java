@@ -76,7 +76,7 @@ public class VirtuosoJenaProvider extends AbstractJenaProvider {
 	            logger.info("Graphname: "+graphName);
 	            logger.info("ServerUrl: "+getServerUrl());
 	            logger.info("UserName: "+getUserName());
-	            logger.info("Password: "+getPassword());
+//	            logger.info("Password: "+getPassword());
 				model = VirtModel.openDatabaseModel(graphName, getServerUrl(), getUserName(), getPassword());
 			} catch (Exception e) {
 				throw new JenaProviderException(e);
